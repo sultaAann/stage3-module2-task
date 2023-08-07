@@ -3,15 +3,18 @@ package com.mjc.school.repository.implRepo;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.database.DataSource;
 import com.mjc.school.repository.model.impl.NewsModel;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     List<NewsModel> newsModels = DataSource.getInstance().getModels();
+
     @Override
     public List<NewsModel> readAll() {
         return newsModels;
@@ -19,9 +22,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public Optional<NewsModel> readById(Long id) {
-        return newsModels.stream()
-                .filter(newsModel -> newsModel.getId().equals(id))
-                .findFirst();
+        return newsModels.stream().filter(newsModel -> newsModel.getId().equals(id)).findFirst();
     }
 
     @Override

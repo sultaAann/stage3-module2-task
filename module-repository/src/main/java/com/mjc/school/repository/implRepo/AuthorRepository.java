@@ -4,7 +4,6 @@ package com.mjc.school.repository.implRepo;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.database.DataSource;
 import com.mjc.school.repository.model.impl.AuthorModel;
-import com.mjc.school.repository.model.impl.NewsModel;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -14,6 +13,7 @@ import java.util.Optional;
 public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     List<AuthorModel> authorModels = DataSource.getInstance().getAuthors();
+
     @Override
     public List<AuthorModel> readAll() {
         return authorModels;
