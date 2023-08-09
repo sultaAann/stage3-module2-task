@@ -48,6 +48,5 @@ public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTORes
     @Override
     public boolean deleteById(Long id) {
         return repository.deleteById(id);
-
     }
 }
