@@ -1,8 +1,8 @@
-package com.mjc.school.commands.impl.authorCommand;
+package com.mjc.school.controller.commands.impl.newsCommand;
 
-import com.mjc.school.MessageHandler;
-import com.mjc.school.commands.Command;
-import com.mjc.school.controller.impl.AuthorController;
+import com.mjc.school.controller.MessageHandler;
+import com.mjc.school.controller.commands.Command;
+import com.mjc.school.controller.impl.NewsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,17 +10,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
-@Component("10")
-public class DeleteAuthorCommand implements Command {
+@Component("5")
+public class DeleteNewsCommand implements Command {
     @Autowired
-    AuthorController controller;
+    NewsController controller;
     @Autowired
     Scanner scanner;
 
     @Override
     public void execute() throws InvocationTargetException, IllegalAccessException {
-        Method method = MessageHandler.get(10);
-        System.out.println("Operation: Delete author by id.\n" + "Enter author id:");
+        Method method = MessageHandler.get(5);
+        System.out.println("Operation: delete news.\n" + "Enter news ID");
         long id = Long.parseLong(scanner.nextLine());
         method.invoke(controller, id);
     }

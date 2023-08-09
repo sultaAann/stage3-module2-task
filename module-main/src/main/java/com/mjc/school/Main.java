@@ -1,8 +1,9 @@
 package com.mjc.school;
 
-import com.mjc.school.commands.impl.authorCommand.*;
-import com.mjc.school.commands.impl.newsCommand.*;
 import com.mjc.school.config.Config;
+import com.mjc.school.controller.MessageHandler;
+import com.mjc.school.controller.commands.impl.authorCommand.*;
+import com.mjc.school.controller.commands.impl.newsCommand.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.lang.reflect.InvocationTargetException;

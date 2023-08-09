@@ -1,7 +1,8 @@
-package com.mjc.school.commands.impl.newsCommand;
+package com.mjc.school.controller.commands.impl.newsCommand;
 
-import com.mjc.school.MessageHandler;
-import com.mjc.school.commands.Command;
+
+import com.mjc.school.controller.MessageHandler;
+import com.mjc.school.controller.commands.Command;
 import com.mjc.school.controller.impl.NewsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

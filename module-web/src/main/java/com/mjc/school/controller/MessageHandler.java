@@ -1,4 +1,4 @@
-package com.mjc.school;
+package com.mjc.school.controller;
 
 import com.mjc.school.controller.annotations.CommandHandler;
 import com.mjc.school.controller.impl.AuthorController;
