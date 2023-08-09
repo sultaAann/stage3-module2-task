@@ -2,15 +2,20 @@ package com.mjc.school.service.implService;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.implRepo.AuthorRepository;
+import com.mjc.school.repository.model.impl.AuthorModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDTORequest;
 import com.mjc.school.service.dto.AuthorDTOResponse;
 import com.mjc.school.service.mapper.AuthorMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTOResponse, Long> {
-    BaseRepository repository = new AuthorRepository();
+    @Autowired
+    BaseRepository<AuthorModel, Long> repository = new AuthorRepository();
     @Override
     public List<AuthorDTOResponse> readAll() {
         return repository.readAll().stream()
@@ -20,21 +25,29 @@ public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTORes
 
     @Override
     public AuthorDTOResponse readById(Long id) {
+        if (repository.readById(id).isPresent()) {
+            return AuthorMapper.INSTANCE.modelToDto(repository.readById(id).get());
+        }
         return null;
     }
 
     @Override
     public AuthorDTOResponse create(AuthorDTORequest createRequest) {
-        return null;
+        AuthorModel model = AuthorMapper.INSTANCE.dtoToModel(createRequest);
+        repository.create(model);
+        return AuthorMapper.INSTANCE.modelToDto(model);
     }
 
     @Override
     public AuthorDTOResponse update(AuthorDTORequest updateRequest) {
-        return null;
+        AuthorModel model = AuthorMapper.INSTANCE.dtoToModel(updateRequest);
+        repository.create(model);
+        return AuthorMapper.INSTANCE.modelToDto(model);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        return false;
+        return repository.deleteById(id);
+
     }
 }

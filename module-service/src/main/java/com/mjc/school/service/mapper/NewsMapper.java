@@ -15,10 +15,7 @@ public interface NewsMapper {
 
     NewsDTOResponse modelToDto(NewsModel model);
 
-    @Mappings({
-            @Mapping(target = "createDate", ignore = true),
-            @Mapping(target = "lastUpdatedDate", ignore = true)
-    })
+
     NewsModel dtoToModel(NewsDTORequest modelDTO);
 
 }

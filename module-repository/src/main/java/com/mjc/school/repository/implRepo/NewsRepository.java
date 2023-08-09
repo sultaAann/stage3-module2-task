@@ -3,14 +3,14 @@ package com.mjc.school.repository.implRepo;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.database.DataSource;
 import com.mjc.school.repository.model.impl.NewsModel;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     List<NewsModel> newsModels = DataSource.getInstance().getModels();
@@ -26,8 +26,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     }
 
     @Override
-    public NewsModel create(NewsModel entity) {
-        NewsModel model = readById(entity.getId()).get();
+    public NewsModel create(NewsModel model) {
         model.setId(newsModels.size() + 1L);
         model.setCreateDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         newsModels.add(model);

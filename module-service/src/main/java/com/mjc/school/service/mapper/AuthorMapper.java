@@ -15,9 +15,5 @@ public interface AuthorMapper {
 
     AuthorDTOResponse modelToDto(AuthorModel model);
 
-    @Mappings({
-            @Mapping(target = "createDate", ignore = true),
-            @Mapping(target = "lastUpdatedDate", ignore = true)
-    })
     AuthorModel dtoToModel(AuthorDTORequest modelDTO);
 }

@@ -6,8 +6,6 @@ public record NewsDTORequest (
         Long id,
         String title,
         String content,
-        LocalDateTime createDate,
-        LocalDateTime lastUpdatedDate,
         Long authorId
 ) {
 }

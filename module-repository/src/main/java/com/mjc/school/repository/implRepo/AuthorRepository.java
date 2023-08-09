@@ -4,12 +4,14 @@ package com.mjc.school.repository.implRepo;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.database.DataSource;
 import com.mjc.school.repository.model.impl.AuthorModel;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     List<AuthorModel> authorModels = DataSource.getInstance().getAuthors();
