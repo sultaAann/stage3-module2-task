@@ -5,13 +5,14 @@ import com.mjc.school.controller.annotations.CommandHandler;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDTORequest;
 import com.mjc.school.service.dto.AuthorDTOResponse;
-import com.mjc.school.service.dto.NewsDTORequest;
-import com.mjc.school.service.implService.NewsService;
+import com.mjc.school.service.exceptions.AuthorIDException;
+import com.mjc.school.service.exceptions.AuthorNameException;
+import com.mjc.school.service.exceptions.NewsIDException;
+import com.mjc.school.service.exceptions.TitleOrContentLengthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Controller
 public class AuthorController implements BaseController<AuthorDTORequest, AuthorDTOResponse, Long> {
@@ -30,7 +31,7 @@ public class AuthorController implements BaseController<AuthorDTORequest, Author
 
     @Override
     @CommandHandler(commandNumber = 7)
-    public AuthorDTOResponse readById(Long id) {
+    public AuthorDTOResponse readById(Long id) throws AuthorIDException, NewsIDException {
         AuthorDTOResponse res = service.readById(id);
         System.out.println(res);
         return res;
@@ -38,7 +39,7 @@ public class AuthorController implements BaseController<AuthorDTORequest, Author
 
     @Override
     @CommandHandler(commandNumber = 8)
-    public AuthorDTOResponse create(AuthorDTORequest createRequest) {
+    public AuthorDTOResponse create(AuthorDTORequest createRequest) throws AuthorNameException, AuthorIDException, TitleOrContentLengthException {
         AuthorDTOResponse res = service.create(createRequest);
         System.out.println(res);
         return res;
@@ -46,7 +47,7 @@ public class AuthorController implements BaseController<AuthorDTORequest, Author
 
     @Override
     @CommandHandler(commandNumber = 9)
-    public AuthorDTOResponse update(AuthorDTORequest updateRequest) {
+    public AuthorDTOResponse update(AuthorDTORequest updateRequest) throws AuthorIDException, AuthorNameException, NewsIDException, TitleOrContentLengthException {
         AuthorDTOResponse res = service.update(updateRequest);
         System.out.println(res);
         return res;
@@ -54,7 +55,7 @@ public class AuthorController implements BaseController<AuthorDTORequest, Author
 
     @Override
     @CommandHandler(commandNumber = 10)
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws AuthorIDException, NewsIDException {
         newsController.deleteRelatedNews(id);
         return service.deleteById(id);
     }

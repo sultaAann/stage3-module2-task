@@ -5,6 +5,10 @@ import com.mjc.school.controller.annotations.CommandHandler;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDTORequest;
 import com.mjc.school.service.dto.NewsDTOResponse;
+import com.mjc.school.service.exceptions.AuthorIDException;
+import com.mjc.school.service.exceptions.AuthorNameException;
+import com.mjc.school.service.exceptions.NewsIDException;
+import com.mjc.school.service.exceptions.TitleOrContentLengthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -28,7 +32,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 2)
-    public NewsDTOResponse readById(Long id) {
+    public NewsDTOResponse readById(Long id) throws AuthorIDException, NewsIDException {
         NewsDTOResponse res = service.readById(id);
         System.out.println(res);
         return res;
@@ -36,7 +40,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 3)
-    public NewsDTOResponse create(NewsDTORequest createRequest) {
+    public NewsDTOResponse create(NewsDTORequest createRequest) throws AuthorNameException, AuthorIDException, TitleOrContentLengthException {
         NewsDTOResponse res = service.create(createRequest);
         System.out.println(res);
         return res;
@@ -44,7 +48,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 4)
-    public NewsDTOResponse update(NewsDTORequest updateRequest) {
+    public NewsDTOResponse update(NewsDTORequest updateRequest) throws AuthorIDException, AuthorNameException, NewsIDException, TitleOrContentLengthException {
         NewsDTOResponse res = service.update(updateRequest);
         System.out.println(res);
         return res;
@@ -52,13 +56,13 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 5)
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws AuthorIDException, NewsIDException {
         Boolean res = service.deleteById(id);
         System.out.println(res);
         return res;
     }
 
-    public boolean deleteRelatedNews(Long id) {
+    public void deleteRelatedNews(Long id) {
         System.out.println("""
                 Delete all articles related to this Author? (Write Number)
                 1. Yes
@@ -67,19 +71,25 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
         if (bool) {
             service.readAll().forEach(newsDTOResponse -> {
                 if (newsDTOResponse.authorId() == id) {
-                    service.deleteById(newsDTOResponse.id());
+                    try {
+                        service.deleteById(newsDTOResponse.id());
+                    } catch (AuthorIDException | NewsIDException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
             System.out.println("All related news have been deleted.");
-            return true;
         } else {
             service.readAll().forEach(newsDTOResponse -> {
                 if (newsDTOResponse.authorId() == id) {
-                    service.update(new NewsDTORequest(newsDTOResponse.id(), newsDTOResponse.title(), newsDTOResponse.content(), null));
+                    try {
+                        service.update(new NewsDTORequest(newsDTOResponse.id(), newsDTOResponse.title(), newsDTOResponse.content(), null));
+                    } catch (AuthorIDException | AuthorNameException | TitleOrContentLengthException | NewsIDException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
             System.out.println("All related authorId fields have been replaced with null.");
-            return true;
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.mjc.school.service.validator;
 
 import com.mjc.school.service.exceptions.AuthorIDException;
+import com.mjc.school.service.exceptions.AuthorNameException;
 import com.mjc.school.service.exceptions.NewsIDException;
 import com.mjc.school.service.exceptions.TitleOrContentLengthException;
 
@@ -35,5 +36,11 @@ public class Validator {
             throw new NewsIDException(ERROR_CODE_3);
         }
         if (id < 0) throw new NewsIDException(ERROR_CODE_1);
+    }
+
+    public static void authorNameValidator(String authorName) throws AuthorNameException {
+        if (authorName.length() < 3 || authorName.length() > 15) {
+            throw new AuthorNameException(ERROR_CODE_6);
+        }
     }
 }

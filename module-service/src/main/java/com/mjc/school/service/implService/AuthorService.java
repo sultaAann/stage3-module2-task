@@ -6,7 +6,10 @@ import com.mjc.school.repository.model.impl.AuthorModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDTORequest;
 import com.mjc.school.service.dto.AuthorDTOResponse;
+import com.mjc.school.service.exceptions.AuthorIDException;
+import com.mjc.school.service.exceptions.AuthorNameException;
 import com.mjc.school.service.mapper.AuthorMapper;
+import com.mjc.school.service.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,8 @@ public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTORes
     }
 
     @Override
-    public AuthorDTOResponse readById(Long id) {
+    public AuthorDTOResponse readById(Long id) throws AuthorIDException {
+        Validator.authorIdValidator(String.valueOf(id));
         if (repository.readById(id).isPresent()) {
             return AuthorMapper.INSTANCE.modelToDto(repository.readById(id).get());
         }
@@ -32,21 +36,26 @@ public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTORes
     }
 
     @Override
-    public AuthorDTOResponse create(AuthorDTORequest createRequest) {
+    public AuthorDTOResponse create(AuthorDTORequest createRequest) throws AuthorNameException, AuthorIDException {
+        Validator.authorIdValidator(String.valueOf(createRequest.id()));
+        Validator.authorNameValidator(createRequest.name());
         AuthorModel model = AuthorMapper.INSTANCE.dtoToModel(createRequest);
         repository.create(model);
         return AuthorMapper.INSTANCE.modelToDto(model);
     }
 
     @Override
-    public AuthorDTOResponse update(AuthorDTORequest updateRequest) {
+    public AuthorDTOResponse update(AuthorDTORequest updateRequest) throws AuthorIDException, AuthorNameException {
+        Validator.authorIdValidator(String.valueOf(updateRequest.id()));
+        Validator.authorNameValidator(updateRequest.name());
         AuthorModel model = AuthorMapper.INSTANCE.dtoToModel(updateRequest);
         repository.update(model);
         return AuthorMapper.INSTANCE.modelToDto(model);
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws AuthorIDException {
+        Validator.authorIdValidator(String.valueOf(id));
         return repository.deleteById(id);
     }
 }
