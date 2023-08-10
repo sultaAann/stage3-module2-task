@@ -5,16 +5,21 @@ import com.mjc.school.controller.annotations.CommandHandler;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDTORequest;
 import com.mjc.school.service.dto.AuthorDTOResponse;
+import com.mjc.school.service.dto.NewsDTORequest;
+import com.mjc.school.service.implService.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Controller
 public class AuthorController implements BaseController<AuthorDTORequest, AuthorDTOResponse, Long> {
     @Autowired
-    BaseService<AuthorDTORequest, AuthorDTOResponse, Long> service;
+    private BaseService<AuthorDTORequest, AuthorDTOResponse, Long> service;
 
+    @Autowired
+    private NewsController newsController;
 
     @Override
     @CommandHandler(commandNumber = 6)
@@ -50,8 +55,8 @@ public class AuthorController implements BaseController<AuthorDTORequest, Author
     @Override
     @CommandHandler(commandNumber = 10)
     public boolean deleteById(Long id) {
-        Boolean res = service.deleteById(id);
-        System.out.println(res);
-        return res;
+        newsController.deleteRelatedNews(id);
+        return service.deleteById(id);
     }
+
 }

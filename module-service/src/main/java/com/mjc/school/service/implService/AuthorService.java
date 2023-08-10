@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTOResponse, Long> {
     @Autowired
-    BaseRepository<AuthorModel, Long> repository = new AuthorRepository();
+    private final BaseRepository<AuthorModel, Long> repository = new AuthorRepository();
     @Override
     public List<AuthorDTOResponse> readAll() {
         return repository.readAll().stream()
@@ -41,7 +41,7 @@ public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTORes
     @Override
     public AuthorDTOResponse update(AuthorDTORequest updateRequest) {
         AuthorModel model = AuthorMapper.INSTANCE.dtoToModel(updateRequest);
-        repository.create(model);
+        repository.update(model);
         return AuthorMapper.INSTANCE.modelToDto(model);
     }
 

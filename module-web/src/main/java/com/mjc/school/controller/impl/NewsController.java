@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Controller
 public class NewsController implements BaseController<NewsDTORequest, NewsDTOResponse, Long> {
     @Autowired
-    BaseService<NewsDTORequest, NewsDTOResponse, Long> service;
+    private BaseService<NewsDTORequest, NewsDTOResponse, Long> service;
+
+    @Autowired
+    private Scanner scanner;
 
     @Override
     @CommandHandler(commandNumber = 1)
@@ -52,5 +56,30 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
         Boolean res = service.deleteById(id);
         System.out.println(res);
         return res;
+    }
+
+    public boolean deleteRelatedNews(Long id) {
+        System.out.println("""
+                Delete all articles related to this Author? (Write Number)
+                1. Yes
+                2. No (Field authorId of related news will be null)""");
+        boolean bool = scanner.nextLine().trim().equals("1");
+        if (bool) {
+            service.readAll().forEach(newsDTOResponse -> {
+                if (newsDTOResponse.authorId() == id) {
+                    service.deleteById(newsDTOResponse.id());
+                }
+            });
+            System.out.println("All related news have been deleted.");
+            return true;
+        } else {
+            service.readAll().forEach(newsDTOResponse -> {
+                if (newsDTOResponse.authorId() == id) {
+                    service.update(new NewsDTORequest(newsDTOResponse.id(), newsDTOResponse.title(), newsDTOResponse.content(), null));
+                }
+            });
+            System.out.println("All related authorId fields have been replaced with null.");
+            return true;
+        }
     }
 }

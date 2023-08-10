@@ -8,6 +8,7 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 @Component
@@ -46,7 +47,7 @@ public class DataSource {
                 AuthorModel author = new AuthorModel();
                 author.setId(id);
                 author.setName(scanner.nextLine());
-                author.setCreateDate(LocalDateTime.now());
+                author.setCreatedDate(LocalDateTime.now());
                 authors.add(author);
             }
         } catch (FileNotFoundException e) {
@@ -64,6 +65,8 @@ public class DataSource {
                 newsModel.setCreateDate(LocalDateTime.now());
                 newsModel.setTitle(news.nextLine());
                 newsModel.setContent(content.nextLine());
+                Random rand = new Random();
+                newsModel.setAuthorId((long) rand.nextInt(30));
                 models.add(newsModel);
             }
         } catch (FileNotFoundException e) {

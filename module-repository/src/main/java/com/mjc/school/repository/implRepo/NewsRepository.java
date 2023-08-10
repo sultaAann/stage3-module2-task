@@ -6,14 +6,14 @@ import com.mjc.school.repository.model.impl.NewsModel;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
+@SuppressWarnings("OptionalGetWithoutIsPresent")
 @Repository
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
-    List<NewsModel> newsModels = DataSource.getInstance().getModels();
+    private final List<NewsModel> newsModels = DataSource.getInstance().getModels();
 
     @Override
     public List<NewsModel> readAll() {

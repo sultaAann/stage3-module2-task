@@ -7,9 +7,8 @@ import java.time.LocalDateTime;
 public class AuthorModel implements BaseEntity<Long> {
     private Long id;
     private String Name;
-    private LocalDateTime createDate;
-    private LocalDateTime lastUpdateDate;
-
+    private LocalDateTime createdDate;
+    private LocalDateTime lastUpdatedDate;
 
     @Override
     public Long getId() {
@@ -29,19 +28,19 @@ public class AuthorModel implements BaseEntity<Long> {
         Name = name;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public LocalDateTime getLastUpdateDate() {
-        return lastUpdateDate;
+    public LocalDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
     }
 
-    public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
+    public void setLastUpdateDate(LocalDateTime lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
     }
 }

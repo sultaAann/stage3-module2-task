@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
-    List<AuthorModel> authorModels = DataSource.getInstance().getAuthors();
+    private final List<AuthorModel> authorModels = DataSource.getInstance().getAuthors();
 
     @Override
     public List<AuthorModel> readAll() {
@@ -29,17 +29,19 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
     }
 
     @Override
-    public AuthorModel create(AuthorModel entity) {
-        AuthorModel model = readById(entity.getId()).get();
+    public AuthorModel create(AuthorModel model) {
+        //noinspection OptionalGetWithoutIsPresent
         model.setId(authorModels.size() + 1L);
-        model.setCreateDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        model.setCreatedDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         authorModels.add(model);
         return model;
     }
 
     @Override
     public AuthorModel update(AuthorModel entity) {
+        //noinspection OptionalGetWithoutIsPresent
         AuthorModel model = readById(entity.getId()).get();
+        model.setName(entity.getName());
         model.setLastUpdateDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         return model;
     }
