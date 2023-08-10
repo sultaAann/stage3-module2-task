@@ -9,8 +9,8 @@ public class NewsModel implements BaseEntity<Long> {
     private String title;
     private String content;
     private LocalDateTime createDate;
-    private LocalDateTime lastUpdateDate;
-    private Long authorID;
+    private LocalDateTime lastUpdatedDate;
+    private Long authorId;
 
     @Override
     public Long getId() {
@@ -46,19 +46,19 @@ public class NewsModel implements BaseEntity<Long> {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getLastUpdateDate() {
-        return lastUpdateDate;
+    public LocalDateTime getLastUpdatedDate() {
+        return lastUpdatedDate;
     }
 
-    public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
+    public void setLastUpdatedDate(LocalDateTime lastUpdatedDate) {
+        this.lastUpdatedDate = lastUpdatedDate;
     }
 
-    public long getAuthorID() {
-        return authorID;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthorID(long authorID) {
-        this.authorID = authorID;
+    public void setAuthorId(Long authorID) {
+        this.authorId = authorID;
     }
 }

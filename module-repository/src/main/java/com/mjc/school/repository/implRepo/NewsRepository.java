@@ -28,7 +28,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     @Override
     public NewsModel create(NewsModel model) {
         model.setId(newsModels.size() + 1L);
-        model.setCreateDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        model.setCreateDate(LocalDateTime.now());
         newsModels.add(model);
         return model;
     }
@@ -36,7 +36,10 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     @Override
     public NewsModel update(NewsModel entity) {
         NewsModel model = readById(entity.getId()).get();
-        model.setLastUpdateDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        model.setLastUpdatedDate(LocalDateTime.now());
+        model.setTitle(entity.getTitle());
+        model.setContent(entity.getContent());
+        model.setAuthorId(entity.getAuthorId());
         return model;
     }
 

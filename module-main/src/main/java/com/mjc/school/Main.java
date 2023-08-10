@@ -1,7 +1,6 @@
 package com.mjc.school;
 
 import com.mjc.school.config.Config;
-import com.mjc.school.controller.MessageHandler;
 import com.mjc.school.controller.commands.impl.authorCommand.*;
 import com.mjc.school.controller.commands.impl.newsCommand.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -28,7 +27,6 @@ public class Main {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-        new MessageHandler();
         Scanner scanner = context.getBean("scanner", Scanner.class);
         while (true) {
             try {
@@ -37,38 +35,17 @@ public class Main {
 
                 int num = Integer.parseInt(scanner.nextLine());
                 switch (num) {
-                    case 1:
-                        context.getBean("1", ReadAllNewsCommand.class).execute();
-                        break;
-                    case 2:
-                        context.getBean("2", ReadByIdNewsCommand.class).execute();
-                        break;
-                    case 3:
-                        context.getBean("3", CreateNewsCommand.class).execute();
-                        break;
-                    case 4:
-                        context.getBean("4", UpdateNewsCommand.class).execute();
-                        break;
-                    case 5:
-                        context.getBean("5", DeleteNewsCommand.class).execute();
-                        break;
-                    case 6:
-                        context.getBean("6", ReadAllAuthorCommand.class).execute();
-                        break;
-                    case 7:
-                        context.getBean("7", ReadByIdAuthorCommand.class).execute();
-                        break;
-                    case 8:
-                        context.getBean("8", CreateAuthorCommand.class).execute();
-                        break;
-                    case 9:
-                        context.getBean("9", UpdateAuthorCommand.class).execute();
-                        break;
-                    case 10:
-                        context.getBean("10", DeleteAuthorCommand.class).execute();
-                        break;
-                    case 0:
-                        System.exit(1);
+                    case 1 -> context.getBean("1", ReadAllNewsCommand.class).execute();
+                    case 2 -> context.getBean("2", ReadByIdNewsCommand.class).execute();
+                    case 3 -> context.getBean("3", CreateNewsCommand.class).execute();
+                    case 4 -> context.getBean("4", UpdateNewsCommand.class).execute();
+                    case 5 -> context.getBean("5", DeleteNewsCommand.class).execute();
+                    case 6 -> context.getBean("6", ReadAllAuthorCommand.class).execute();
+                    case 7 -> context.getBean("7", ReadByIdAuthorCommand.class).execute();
+                    case 8 -> context.getBean("8", CreateAuthorCommand.class).execute();
+                    case 9 -> context.getBean("9", UpdateAuthorCommand.class).execute();
+                    case 10 -> context.getBean("10", DeleteAuthorCommand.class).execute();
+                    case 0 -> System.exit(1);
                 }
 
             } catch (RuntimeException e) {

@@ -46,6 +46,7 @@ public class DataSource {
                 AuthorModel author = new AuthorModel();
                 author.setId(id);
                 author.setName(scanner.nextLine());
+                author.setCreateDate(LocalDateTime.now());
                 authors.add(author);
             }
         } catch (FileNotFoundException e) {
