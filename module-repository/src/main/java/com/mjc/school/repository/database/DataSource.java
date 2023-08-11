@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-@Component
 public class DataSource {
     private static DataSource INSTANCE;
     private final List<NewsModel> models = new ArrayList<>();
