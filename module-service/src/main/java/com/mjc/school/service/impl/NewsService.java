@@ -1,7 +1,6 @@
-package com.mjc.school.service.implService;
+package com.mjc.school.service.impl;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.implRepo.NewsRepository;
 import com.mjc.school.repository.model.impl.NewsModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDTORequest;
@@ -13,13 +12,13 @@ import com.mjc.school.service.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 
 @Service
 public class NewsService implements BaseService<NewsDTORequest, NewsDTOResponse, Long> {
     @Autowired
-    BaseRepository<NewsModel, Long> repository = new NewsRepository();
+    private BaseRepository<NewsModel, Long> repository;
+
     @Override
     public List<NewsDTOResponse> readAll() {
         return repository.readAll().stream()

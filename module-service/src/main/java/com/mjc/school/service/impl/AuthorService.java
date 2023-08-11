@@ -1,7 +1,6 @@
-package com.mjc.school.service.implService;
+package com.mjc.school.service.impl;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.implRepo.AuthorRepository;
 import com.mjc.school.repository.model.impl.AuthorModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDTORequest;
@@ -18,7 +17,8 @@ import java.util.List;
 @Service
 public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTOResponse, Long> {
     @Autowired
-    private final BaseRepository<AuthorModel, Long> repository = new AuthorRepository();
+    private BaseRepository<AuthorModel, Long> repository;
+
     @Override
     public List<AuthorDTOResponse> readAll() {
         return repository.readAll().stream()
@@ -37,7 +37,6 @@ public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTORes
 
     @Override
     public AuthorDTOResponse create(AuthorDTORequest createRequest) throws AuthorNameException, AuthorIDException {
-        Validator.authorIdValidator(String.valueOf(createRequest.id()));
         Validator.authorNameValidator(createRequest.name());
         AuthorModel model = AuthorMapper.INSTANCE.dtoToModel(createRequest);
         repository.create(model);

@@ -4,6 +4,7 @@ package com.mjc.school.repository.implRepo;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.database.DataSource;
 import com.mjc.school.repository.model.impl.AuthorModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -13,7 +14,6 @@ import java.util.Optional;
 
 @Repository
 public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
-
     private final List<AuthorModel> authorModels = DataSource.getInstance().getAuthors();
 
     @Override
