@@ -2,13 +2,13 @@ package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.annotations.CommandHandler;
-import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDTORequest;
 import com.mjc.school.service.dto.AuthorDTOResponse;
 import com.mjc.school.service.exceptions.AuthorIDException;
 import com.mjc.school.service.exceptions.AuthorNameException;
 import com.mjc.school.service.exceptions.NewsIDException;
 import com.mjc.school.service.exceptions.TitleOrContentLengthException;
+import com.mjc.school.service.impl.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class AuthorController implements BaseController<AuthorDTORequest, AuthorDTOResponse, Long> {
     @Autowired
-    private BaseService<AuthorDTORequest, AuthorDTOResponse, Long> service;
+    private AuthorService service;
 
     @Autowired
     private NewsController newsController;

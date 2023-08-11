@@ -2,13 +2,11 @@ package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.annotations.CommandHandler;
-import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDTORequest;
 import com.mjc.school.service.dto.NewsDTOResponse;
-import com.mjc.school.service.exceptions.AuthorIDException;
-import com.mjc.school.service.exceptions.AuthorNameException;
 import com.mjc.school.service.exceptions.NewsIDException;
 import com.mjc.school.service.exceptions.TitleOrContentLengthException;
+import com.mjc.school.service.impl.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -18,7 +16,7 @@ import java.util.Scanner;
 @Controller
 public class NewsController implements BaseController<NewsDTORequest, NewsDTOResponse, Long> {
     @Autowired
-    private BaseService<NewsDTORequest, NewsDTOResponse, Long> service;
+    private NewsService service;
 
     @Autowired
     private Scanner scanner;
@@ -32,7 +30,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 2)
-    public NewsDTOResponse readById(Long id) throws AuthorIDException, NewsIDException {
+    public NewsDTOResponse readById(Long id) throws NewsIDException {
         NewsDTOResponse res = service.readById(id);
         System.out.println(res);
         return res;
@@ -40,7 +38,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 3)
-    public NewsDTOResponse create(NewsDTORequest createRequest) throws AuthorNameException, AuthorIDException, TitleOrContentLengthException {
+    public NewsDTOResponse create(NewsDTORequest createRequest) throws TitleOrContentLengthException {
         NewsDTOResponse res = service.create(createRequest);
         System.out.println(res);
         return res;
@@ -48,7 +46,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 4)
-    public NewsDTOResponse update(NewsDTORequest updateRequest) throws AuthorIDException, AuthorNameException, NewsIDException, TitleOrContentLengthException {
+    public NewsDTOResponse update(NewsDTORequest updateRequest) throws NewsIDException, TitleOrContentLengthException {
         NewsDTOResponse res = service.update(updateRequest);
         System.out.println(res);
         return res;
@@ -56,7 +54,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
 
     @Override
     @CommandHandler(commandNumber = 5)
-    public boolean deleteById(Long id) throws AuthorIDException, NewsIDException {
+    public boolean deleteById(Long id) throws NewsIDException {
         Boolean res = service.deleteById(id);
         System.out.println(res);
         return res;
@@ -73,7 +71,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
                 if (newsDTOResponse.authorId() == id) {
                     try {
                         service.deleteById(newsDTOResponse.id());
-                    } catch (AuthorIDException | NewsIDException e) {
+                    } catch (NewsIDException e) {
                         throw new RuntimeException(e);
                     }
                 }
@@ -84,7 +82,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
                 if (newsDTOResponse.authorId() == id) {
                     try {
                         service.update(new NewsDTORequest(newsDTOResponse.id(), newsDTOResponse.title(), newsDTOResponse.content(), null));
-                    } catch (AuthorIDException | AuthorNameException | TitleOrContentLengthException | NewsIDException e) {
+                    } catch (TitleOrContentLengthException | NewsIDException e) {
                         throw new RuntimeException(e);
                     }
                 }
