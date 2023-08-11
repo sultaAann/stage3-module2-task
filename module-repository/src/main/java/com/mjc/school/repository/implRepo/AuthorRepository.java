@@ -1,4 +1,4 @@
-package com.mjc.school.repository.impl;
+package com.mjc.school.repository.implRepo;
 
 
 import com.mjc.school.repository.BaseRepository;

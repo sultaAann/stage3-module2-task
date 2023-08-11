@@ -1,7 +1,7 @@
 package com.mjc.school.service.implService;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.impl.AuthorRepository;
+import com.mjc.school.repository.implRepo.AuthorRepository;
 import com.mjc.school.repository.model.impl.AuthorModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDTORequest;

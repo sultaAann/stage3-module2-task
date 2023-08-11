@@ -25,7 +25,7 @@ public class ReadByIdNewsCommand implements Command {
     @Override
     public void execute() throws InvocationTargetException, IllegalAccessException {
         Method method = MessageHandler.get(2);
-        System.out.println("Operation: Get news.txt by id.\n" + "Enter news.txt id:");
+        System.out.println("Operation: Get news by id.\n" + "Enter news id:");
         long id = Long.parseLong(scanner.nextLine());
         method.invoke(controller, id);
     }

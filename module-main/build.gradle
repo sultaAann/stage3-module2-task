@@ -3,11 +3,7 @@ plugins {
 }
 
 mainClassName = 'com.mjc.school.Main'
-//jar {
-//    manifest {
-//        attributes 'Main-Class': mainClassName
-//    }
-//}
+
 dependencies {
     implementation project(':module-web')
 }

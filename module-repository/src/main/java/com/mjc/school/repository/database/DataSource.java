@@ -41,7 +41,7 @@ public class DataSource {
         readContentsAndNews();
     }
     private void readAuthors() {
-        try (Scanner scanner = new Scanner(new File("module-repository/src/main/resources/authors.txt"))) {
+        try (Scanner scanner = new Scanner(new File("module-repository/src/main/resources/authors"))) {
             while (scanner.hasNextLine()) {
                 long id = authors.size() + 1;
                 AuthorModel author = new AuthorModel();
@@ -56,8 +56,8 @@ public class DataSource {
     }
 
     private void readContentsAndNews() {
-        try (Scanner content = new Scanner(new File("module-repository/src/main/resources/content.txt"));
-             Scanner news = new Scanner(new File("module-repository/src/main/resources/news.txt"))) {
+        try (Scanner content = new Scanner(new File("module-repository/src/main/resources/content"));
+             Scanner news = new Scanner(new File("module-repository/src/main/resources/news"))) {
             while (content.hasNextLine() && news.hasNextLine()) {
                 long id = models.size() + 1;
                 NewsModel newsModel = new NewsModel();

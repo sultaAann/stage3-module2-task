@@ -25,7 +25,7 @@ public class DeleteNewsCommand implements Command {
     @Override
     public void execute() throws InvocationTargetException, IllegalAccessException {
         Method method = MessageHandler.get(5);
-        System.out.println("Operation: delete news.txt.\n" + "Enter news.txt ID");
+        System.out.println("Operation: delete news.\n" + "Enter news ID");
         long id = Long.parseLong(scanner.nextLine());
         method.invoke(controller, id);
     }
