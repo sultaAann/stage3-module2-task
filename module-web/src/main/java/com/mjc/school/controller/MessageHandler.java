@@ -44,8 +44,10 @@ public class MessageHandler {
         for (Method method : annotatedMethodsClass1.getDeclaredMethods()) {
 
             Annotation annotation = method.getAnnotation(CommandHandler.class);
-            CommandHandler command1 = (CommandHandler) annotation;
-            COMMANDS.put(command1.commandNumber(), method);
+            if (annotation != null) {
+                CommandHandler command1 = (CommandHandler) annotation;
+                COMMANDS.put(command1.commandNumber(), method);
+            }
         }
     }
 }
