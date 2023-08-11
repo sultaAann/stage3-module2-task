@@ -66,7 +66,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
         System.out.println("""
                 Delete all articles related to this Author? (Write Number)
                 1. Yes
-                2. No (Field authorId of related news will be null)""");
+                2. No (Field authorId of related news.txt will be null)""");
         boolean bool = scanner.nextLine().trim().equals("1");
         if (bool) {
             service.readAll().forEach(newsDTOResponse -> {
@@ -78,7 +78,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
                     }
                 }
             });
-            System.out.println("All related news have been deleted.");
+            System.out.println("All related news.txt have been deleted.");
         } else {
             service.readAll().forEach(newsDTOResponse -> {
                 if (newsDTOResponse.authorId() == id) {

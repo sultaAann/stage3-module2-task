@@ -41,7 +41,7 @@ public class DataSource {
         readContentsAndNews();
     }
     private void readAuthors() {
-        try (Scanner scanner = new Scanner(new File("module-repository/src/main/resources/authors"))) {
+        try (Scanner scanner = new Scanner(new File("module-repository/src/main/resources/authors.txt"))) {
             while (scanner.hasNextLine()) {
                 long id = authors.size() + 1;
                 AuthorModel author = new AuthorModel();
@@ -56,8 +56,8 @@ public class DataSource {
     }
 
     private void readContentsAndNews() {
-        try (Scanner content = new Scanner(new File("module-repository/src/main/resources/content"));
-             Scanner news = new Scanner(new File("module-repository/src/main/resources/news"))) {
+        try (Scanner content = new Scanner(new File("module-repository/src/main/resources/content.txt"));
+             Scanner news = new Scanner(new File("module-repository/src/main/resources/news.txt"))) {
             while (content.hasNextLine() && news.hasNextLine()) {
                 long id = models.size() + 1;
                 NewsModel newsModel = new NewsModel();
@@ -66,7 +66,7 @@ public class DataSource {
                 newsModel.setTitle(news.nextLine());
                 newsModel.setContent(content.nextLine());
                 Random rand = new Random();
-                newsModel.setAuthorId((long) rand.nextInt(30));
+                newsModel.setAuthorId((long) 1 + rand.nextInt(31 - 1));
                 models.add(newsModel);
             }
         } catch (FileNotFoundException e) {

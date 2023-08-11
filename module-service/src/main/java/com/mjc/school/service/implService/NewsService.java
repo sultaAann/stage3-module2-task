@@ -1,7 +1,7 @@
 package com.mjc.school.service.implService;
 
 import com.mjc.school.repository.BaseRepository;
-import com.mjc.school.repository.implRepo.NewsRepository;
+import com.mjc.school.repository.impl.NewsRepository;
 import com.mjc.school.repository.model.impl.NewsModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.NewsDTORequest;

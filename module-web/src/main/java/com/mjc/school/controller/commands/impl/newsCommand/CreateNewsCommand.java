@@ -25,9 +25,9 @@ public class CreateNewsCommand implements Command {
     @Override
     public void execute() throws InvocationTargetException, IllegalAccessException {
         Method method = MessageHandler.get(3);
-        System.out.println("Operation: Create news.\n" + "Enter news title:");
+        System.out.println("Operation: Create news.txt.\n" + "Enter news.txt title:");
         String title = scanner.nextLine();
-        System.out.println("Enter news content:");
+        System.out.println("Enter news.txt content.txt:");
         String content = scanner.nextLine();
         System.out.println("Enter author ID");
         Long authorID = Long.parseLong(scanner.nextLine());

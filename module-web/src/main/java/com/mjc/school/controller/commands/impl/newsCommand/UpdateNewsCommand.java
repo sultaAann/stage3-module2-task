@@ -25,11 +25,11 @@ public class UpdateNewsCommand implements Command {
     @Override
     public void execute() throws InvocationTargetException, IllegalAccessException {
         Method method = MessageHandler.get(4);
-        System.out.println("Operation: Update news.\n" + "Enter news ID");
+        System.out.println("Operation: Update news.txt.\n" + "Enter news.txt ID");
         long id = Long.parseLong(scanner.nextLine());
-        System.out.println("Enter news title:");
+        System.out.println("Enter news.txt title:");
         String title = scanner.nextLine();
-        System.out.println("Enter news content:");
+        System.out.println("Enter news.txt content.txt:");
         String content = scanner.nextLine();
         System.out.println("Enter author ID");
         long authorID = Long.parseLong(scanner.nextLine());

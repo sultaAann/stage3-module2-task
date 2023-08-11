@@ -14,7 +14,7 @@ public class Validator {
             throw new TitleOrContentLengthException(String.format(ERROR_CODE_2, "title", 30));
         }
         if (content.length() < 5 || content.length() > 255) {
-            throw new TitleOrContentLengthException(String.format(ERROR_CODE_2, "content", 255));
+            throw new TitleOrContentLengthException(String.format(ERROR_CODE_2, "content.txt", 255));
         }
     }
 
