@@ -57,5 +57,4 @@ public class AuthorController implements BaseController<AuthorDTORequest, Author
         newsController.deleteRelatedNews(id);
         return service.deleteById(id);
     }
-
 }
