@@ -3,9 +3,11 @@ package com.mjc.school.repository.database;
 import com.mjc.school.repository.model.impl.AuthorModel;
 import com.mjc.school.repository.model.impl.NewsModel;
 import com.mjc.school.repository.utils.Utils;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class DataSource {
     private static DataSource INSTANCE;
     private final List<NewsModel> models;

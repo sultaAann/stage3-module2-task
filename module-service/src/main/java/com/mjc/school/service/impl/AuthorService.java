@@ -36,7 +36,7 @@ public class AuthorService implements BaseService<AuthorDTORequest, AuthorDTORes
     }
 
     @Override
-    public AuthorDTOResponse create(AuthorDTORequest createRequest) throws AuthorNameException, AuthorIDException {
+    public AuthorDTOResponse create(AuthorDTORequest createRequest) throws AuthorNameException {
         Validator.authorNameValidator(createRequest.name());
         AuthorModel model = AuthorMapper.INSTANCE.dtoToModel(createRequest);
         repository.create(model);
