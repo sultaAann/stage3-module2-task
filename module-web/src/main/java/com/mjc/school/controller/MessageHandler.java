@@ -3,7 +3,6 @@ package com.mjc.school.controller;
 import com.mjc.school.controller.annotations.CommandHandler;
 import com.mjc.school.controller.impl.AuthorController;
 import com.mjc.school.controller.impl.NewsController;
-import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("CastCanBeRemovedNarrowingVariableType")
-@Component
+
 public class MessageHandler {
 
     private static final Map<Integer, Method> COMMANDS = new HashMap<>();
