@@ -31,7 +31,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
     @Override
     public AuthorModel create(AuthorModel model) {
         //noinspection OptionalGetWithoutIsPresent
-        model.setId(authorModels.size() + 1L);
+        model.setId(authorModels.get(authorModels.size() - 1).getId() + 1L);
         model.setCreatedDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         authorModels.add(model);
         return model;

@@ -27,7 +27,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public NewsModel create(NewsModel model) {
-        model.setId(newsModels.size() + 1L);
+        model.setId(newsModels.get(newsModels.size() - 1).getId() + 1);
         model.setCreateDate(LocalDateTime.now());
         newsModels.add(model);
         return model;
