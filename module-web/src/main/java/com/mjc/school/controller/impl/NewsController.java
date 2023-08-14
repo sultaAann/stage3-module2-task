@@ -18,8 +18,7 @@ public class NewsController implements BaseController<NewsDTORequest, NewsDTORes
     @Autowired
     private NewsService service;
 
-    @Autowired
-    private Scanner scanner;
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     @CommandHandler(commandNumber = 1)

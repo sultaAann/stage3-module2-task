@@ -19,8 +19,7 @@ public class ReadByIdNewsCommand implements Command {
     @Qualifier("newsController")
     private BaseController<NewsDTORequest, NewsDTOResponse, Long> controller;
 
-    @Autowired
-    private Scanner scanner;
+    private final Scanner scanner = new Scanner(System.in);
 
     @Override
     public void execute() throws InvocationTargetException, IllegalAccessException {

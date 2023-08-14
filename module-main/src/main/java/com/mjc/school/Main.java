@@ -28,8 +28,7 @@ public class Main {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-        Scanner scanner = context.getBean("scanner", Scanner.class);
-        new MessageHandler();
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
                 System.out.println(COMMANDS);

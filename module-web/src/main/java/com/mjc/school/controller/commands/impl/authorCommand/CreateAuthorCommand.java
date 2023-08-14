@@ -16,8 +16,7 @@ import java.util.Scanner;
 
 @Component("8")
 public class CreateAuthorCommand implements Command {
-    @Autowired
-    Scanner scanner;
+    private Scanner scanner = new Scanner(System.in);
     @Autowired
     private BaseController<AuthorDTORequest, AuthorDTOResponse, Long> controller;
 
@@ -27,5 +26,6 @@ public class CreateAuthorCommand implements Command {
         System.out.println("Operation: Create author. \n" + "Enter Author's name:");
         String name = scanner.nextLine();
         method.invoke(controller, new AuthorDTORequest(null, name));
+
     }
 }

@@ -17,8 +17,8 @@ import java.util.Scanner;
 public class DeleteAuthorCommand implements Command {
     @Autowired
     private BaseController<AuthorDTORequest, AuthorDTOResponse, Long> controller;
-    @Autowired
-    private Scanner scanner;
+
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public void execute() throws InvocationTargetException, IllegalAccessException {
